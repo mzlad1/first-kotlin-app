@@ -6,33 +6,29 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.firstkotlinapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var textEdit1 : EditText
-    lateinit var textEdit2 : EditText
-    lateinit var textView1 : TextView
-    lateinit var textView2 : TextView
-    lateinit var button : Button
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setup()
-    }
-
-    fun setup(){
-        textEdit1 = findViewById(R.id.editTextText)
-        textEdit2 = findViewById(R.id.editTextText2)
-        textView1 = findViewById(R.id.textView1)
-        textView2 = findViewById(R.id.textView2)
-        button = findViewById(R.id.button)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     fun clickMe(view : View){
-        var textName : String = textEdit1.text.toString()
-        var textEmail : String = textEdit2.text.toString()
+        var textName : String = binding.editTextText.text.toString()
+        var textEmail : String = binding.editTextText2.text.toString()
 
-        textView2.setText("Your Name is : " + textName +"\n" + "Your Email is : "+ textEmail)
+        binding.textView2.setText("Your Name is : " + textName +"\n" + "Your Email is : "+ textEmail)
 
     }
+
+    override fun onPause() {
+        super.onPause()
+        binding.editTextText.setText("")
+        binding.editTextText2.setText("")
+    }
+
 }
